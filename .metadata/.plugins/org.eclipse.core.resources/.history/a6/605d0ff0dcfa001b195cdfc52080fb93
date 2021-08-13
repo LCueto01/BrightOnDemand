@@ -1,0 +1,23 @@
+package com.google;
+
+import java.util.ArrayList;
+
+
+/** A class used to represent a Playlist */
+class VideoPlaylist {
+
+	
+	private ArrayList<Video> playlist;
+	private String playlistName;
+	
+	public VideoPlaylist(String name) {
+		this.playlistName = name;
+		playlist = new ArrayList<Video>();
+	}
+	
+	public String getName() {
+		return playlistName;
+	}
+	
+	
+}

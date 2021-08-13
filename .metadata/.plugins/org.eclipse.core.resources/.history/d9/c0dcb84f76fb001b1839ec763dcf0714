@@ -1,0 +1,90 @@
+package com.google;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class PlaylistLibrary {
+
+	private ArrayList<VideoPlaylist> allPlaylists;
+	
+	public PlaylistLibrary() {
+		allPlaylists = new ArrayList<VideoPlaylist>();
+	}
+
+	public ArrayList<VideoPlaylist> getAllPlaylists() {
+		return allPlaylists;
+	}
+	
+	public void addPlayList(String playlistName) {
+		boolean alreadyCreated = checkPlaylist(playlistName);
+		if(!alreadyCreated) {
+			VideoPlaylist newPlaylist = new VideoPlaylist(playlistName);
+			allPlaylists.add(newPlaylist);
+		}
+	}
+	
+	public boolean addVideoToPlaylist(String playlistName, Video vid) {
+		for(VideoPlaylist playlist: allPlaylists) {
+			if(playlist.getName().compareTo(playlistName) == 0) {
+				if(playlist.addToPlaylist(vid)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void removeSongFromPlaylist(String playlistName, String videoId) {
+		for(VideoPlaylist playlist: allPlaylists) {
+			if(playlist.getName().compareTo(playlistName) == 0) {
+				playlist.removeVideo(videoId);
+			}
+		}
+	}
+	
+	public VideoPlaylist getPlaylist(String playlistName) {
+		for(VideoPlaylist playlist: allPlaylists) {
+			if(playlist != null && playlist.getName().toUpperCase().compareTo(playlistName.toUpperCase()) == 0) {
+				return playlist;
+			}
+		}
+		return null;
+	}
+	
+	public void deletePlaylist(String playlistName) {
+		int index = 0;
+		for(VideoPlaylist playlist: allPlaylists) {
+			if(playlist.getName().toUpperCase().compareTo(playlistName.toUpperCase()) == 0) {
+				allPlaylists.set(index, null);
+				break;
+			}
+			index++;
+		}
+	}
+	
+	public boolean checkPlaylist(String playlistName) {
+		for(VideoPlaylist play: allPlaylists) {
+			if(play.getName().compareTo(playlistName) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	// other methods
+	
+	ArrayList<VideoPlaylist> sortPlaylist(ArrayList<VideoPlaylist> list){
+		VideoPlaylist temp = null;
+		for(int i = 0; i < list.size();i++) {
+			if(i != list.size()-1 && list.get(i + 1).getName().charAt(0) < list.get(i + 1).getName().charAt(0)) {
+				temp = list.get(i);
+				list.set(i, list.get(i+1));
+				list.set(i+1, temp);
+				i = -1;
+			}
+		}
+		
+		return list;
+	}
+}

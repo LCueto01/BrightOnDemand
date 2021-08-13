@@ -1,0 +1,10 @@
+package com.google;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/** A class used to represent a Playlist */
+class VideoPlaylist {
+
+	HashMap<String,ArrayList<Video>> playlist;
+}

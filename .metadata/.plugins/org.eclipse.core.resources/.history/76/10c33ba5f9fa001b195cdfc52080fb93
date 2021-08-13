@@ -1,0 +1,65 @@
+package com.google;
+
+import java.util.ArrayList;
+
+public class PlaylistLibrary {
+
+	private ArrayList<VideoPlaylist> allPlaylists;
+	
+	public PlaylistLibrary() {
+		allPlaylists = new ArrayList<VideoPlaylist>();
+	}
+
+	public ArrayList<VideoPlaylist> getAllPlaylists() {
+		return allPlaylists;
+	}
+	
+	public void addPlayList(String playlistName) {
+		boolean alreadyCreated = checkPlaylist(playlistName);
+		if(alreadyCreated) {
+			System.out.println("Cannot create playlist: A playlist with the same name already exists");
+		}
+		else {
+			VideoPlaylist newPlaylist = new VideoPlaylist(playlistName);
+			allPlaylists.add(newPlaylist);
+			System.out.println("Successfully created new playlist: " + newPlaylist.getName());
+		}
+	}
+	
+	public void addSongToPlaylist(String playlistName, Video vid) {
+		for(VideoPlaylist playlist: allPlaylists) {
+			if(playlist.getName().compareTo(playlistName) == 0) {
+				playlist.addToPlaylist(vid);
+			}
+		}
+	}
+	
+	public VideoPlaylist getPlaylist(String playlistName) {
+		for(VideoPlaylist playlist: allPlaylists) {
+			if(playlist != null && playlist.getName().compareTo(playlistName) == 0) {
+				return playlist;
+			}
+		}
+		return null;
+	}
+	
+	public void deletePlaylist(String playlistName) {
+		int index = 0;
+		for(VideoPlaylist playlist: allPlaylists) {
+			if(playlist.getName().compareTo(playlistName) == 0) {
+				allPlaylists.set(index, null);
+				break;
+			}
+			index++;
+		}
+	}
+	
+	public boolean checkPlaylist(String playlistName) {
+		for(VideoPlaylist play: allPlaylists) {
+			if(play.getName().compareTo(playlistName) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+}
