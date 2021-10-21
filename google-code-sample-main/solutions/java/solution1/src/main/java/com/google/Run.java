@@ -10,6 +10,7 @@ public class Run {
     var videoPlayer = new VideoPlayer();
     var parser = new CommandParser(videoPlayer);
     var scanner = new Scanner(System.in);
+    System.out.println("Test git");
     while (true) {
       System.out.print("YT> ");
       var input = scanner.nextLine();
